@@ -5,7 +5,7 @@ This project implements a simple RESTful API for a sleep tracker app using Node.
 ## Getting Started
 
 1. **Clone the Repository:**
-```git clone https://github.com/ikunal-04/sleepApp.git```
+```https://github.com/vivek-panchal/sleepTracker```
 ```cd sleepApp```
 
 2. **Change to respective directories:**
