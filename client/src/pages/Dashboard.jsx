@@ -39,7 +39,7 @@ const Dashboard = () => {
     async function handleCreate(e) {
         e.preventDefault();
         try {
-            const res = await axios.post("http://localhost:3000/api/sleep", { hours, timestamp: date }, config);
+            const res = await axios.post("https://sleep-tracker-six.vercel.app/api/sleep", { hours, timestamp: date }, config);
             toast({ title: 'Sleep Duration Created!', status: 'success', duration: 6000, isClosable: true });
             setSleepRecords([...sleepRecords, res.data]);
             onCreateClose();
@@ -50,7 +50,7 @@ const Dashboard = () => {
 
     async function handleDelete() {
         try {
-            await axios.delete(`http://localhost:3000/api/sleep/${deleteRecordId}`, config);
+            await axios.delete(`https://sleep-tracker-six.vercel.app/api/sleep/${deleteRecordId}`, config);
             setSleepRecords(sleepRecords.filter(record => record._id !== deleteRecordId));
             onAlertClose();
             toast({ title: 'Sleep Record Deleted!', status: 'success', duration: 6000, isClosable: true });
@@ -62,7 +62,7 @@ const Dashboard = () => {
     async function handleUpdate(e) {
         e.preventDefault();
         try {
-            const res = await axios.put(`http://localhost:3000/api/sleep/${editRecordId}`, { hours: editHours, timestamp: editDate }, config);
+            const res = await axios.put(`https://sleep-tracker-six.vercel.app/api/sleep/${editRecordId}`, { hours: editHours, timestamp: editDate }, config);
             setSleepRecords(sleepRecords.map(record => record._id === editRecordId ? res.data : record));
             toast({ title: 'Sleep Record Updated!', status: 'success', duration: 6000, isClosable: true });
             onEditClose();
@@ -74,7 +74,7 @@ const Dashboard = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const res = await axios.get(`http://localhost:3000/api/sleep/${userId}`, config);
+                const res = await axios.get(`hhttps://sleep-tracker-six.vercel.app/api/sleep/${userId}`, config);
                 setSleepRecords(res.data);
             } catch (err) {
                 console.log(err.response.data);
