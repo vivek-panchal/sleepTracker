@@ -61,7 +61,7 @@ router.put('/:recordId', authMiddleware, async (req, res) => {
         if (timestamp) record.timestamp = timestamp;
 
         await record.save();
-        res.status(200).json({ message: 'Record updated successfully.' });
+        res.status(200).json({ message: 'Record updated successfully.', record});
     } catch (error) {
         res.status(500).send(error.message);
     }
