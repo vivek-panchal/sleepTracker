@@ -13,3 +13,5 @@ app.use(express.json());
 app.use('/api', router);
 
 app.listen(3000);
+
+module.exports = app;

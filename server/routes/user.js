@@ -30,7 +30,8 @@ router.post('/login', async (req, res) => {
             const token = jwt.sign({ userId }, process.env.SECRET);
             return res.status(200).json({
                 message: "User logged in successfully",
-                token
+                token,
+                user
             });
         }
 
@@ -39,7 +40,8 @@ router.post('/login', async (req, res) => {
 
         return res.status(200).json({
             message: "User logged in successfully",
-            token
+            token,
+            user:userExists
         });
     } catch (error) {
         console.log(error);

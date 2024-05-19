@@ -11,7 +11,7 @@ router.post('/', authMiddleware, async (req, res) => {
     const { hours, timestamp } = req.body;
     console.log(req.userId, hours, timestamp);
     if (!hours || !timestamp) {
-        return res.status(400).send('Hours and timestamp are required.');
+        return res.status(400).json({message: 'Hours and timestamp are required.'});
     }
 
     const parsedTimestamp = new Date(timestamp);
@@ -48,20 +48,20 @@ router.get('/:userId', authMiddleware, async (req, res) => {
 router.put('/:recordId', authMiddleware, async (req, res) => {
     const { hours, timestamp } = req.body;
     if (!hours && !timestamp) {
-        return res.status(400).send('Hours or timestamp must be provided.');
+        return res.status(400).json({message: 'Hours or timestamp must be provided.'});
     }
 
     try {
         const record = await Sleep.findById(req.params.recordId);
         if (!record) {
-            return res.status(404).send('Record not found.');
+            return res.status(404).json({message: 'Record not found.'});
         }
 
         if (hours) record.hours = hours;
         if (timestamp) record.timestamp = timestamp;
 
         await record.save();
-        res.status(200).send('Record updated successfully.');
+        res.status(200).json({ message: 'Record updated successfully.' });
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -71,10 +71,10 @@ router.delete('/:recordId', authMiddleware, async (req, res) => {
     try {
         const record = await Sleep.findById(req.params.recordId);
         if (!record) {
-            return res.status(404).send('Record not found.');
+            return res.status(404).json({message: 'Record not found.'});
         }
         await Sleep.findByIdAndDelete(req.params.recordId);
-        res.status(200).send('Record deleted successfully');
+        res.status(200).json({message: 'Record deleted successfully.'});
     } catch (error) {
         res.status(500).send(error.message);
     }
